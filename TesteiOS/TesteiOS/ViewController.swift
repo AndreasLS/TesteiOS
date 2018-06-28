@@ -7,11 +7,8 @@
 //
 
 import UIKit
+import TesteiOSFramework
 
 class ViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
 
 }
