@@ -20,5 +20,6 @@ extension UIColor {
     static var cloudy = UIColor(red: 0.69, green: 0.66, blue: 0.64, alpha: 1.0)
     static var lava = UIColor(red: 0.85, green: 0.04, blue: 0.09, alpha: 1.0)
     static var geraldine = UIColor(red: 0.92, green: 0.46, blue: 0.46, alpha: 1.0)
+    static var thunderBird = UIColor(red: 0.73, green: 0.15, blue: 0.11, alpha: 1.0)
 
 }

@@ -8,29 +8,41 @@
 
 import Foundation
 
+public protocol TITabBarDelegate: class {
+    func didChangeSelected(index: Int)
+}
+
 @IBDesignable
 public class TITabBar: UIView {
-    
+
     @IBInspectable var height: CGFloat = 55.0
-    @IBInspectable var selectedColor: UIColor = .white
-    @IBInspectable var backgroundTabColor: UIColor = .white
+    @IBInspectable var selectedColor: UIColor = DefaultStyle.instance.tabBarSelectedColor
+    @IBInspectable var backgroundTabColor: UIColor = DefaultStyle.instance.tabBarDefaultColor
+
+    public weak var delegate: TITabBarDelegate?
+    private var observe: NSKeyValueObservation?
 
     var selectedIndex: Int = 0 {
         didSet {
             moveLine()
+            delegate?.didChangeSelected(index: selectedIndex)
         }
     }
 
-    public var buttons: [UIButton] = [] {
-        didSet {
-            putButtons()
-            setNeedsLayout()
-        }
-    }
+    private(set) var buttons: [UIButton] = []
 
     private var stackView: UIStackView?
     private var line: UIView?
     private var lineWidth: NSLayoutConstraint?
+
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.backgroundColor = .clear
+    }
+
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
 
     public override func draw(_ rect: CGRect) {
 
@@ -65,15 +77,21 @@ public class TITabBar: UIView {
                                attribute: .leading, multiplier: 1, constant: 0)
             ])
 
-        self.lineWidth =
-            NSLayoutConstraint(item: view, attribute: .width, relatedBy: .equal, toItem: nil,
-                               attribute: .notAnAttribute, multiplier: 1,
-                               constant: self.frame.width / CGFloat(buttons.count))
+        createLineWidth(multiplier: 0)
 
-        view.addConstraints([
+        observe = observe(\.bounds, options: [.new]) { (object, _) in
+            guard let line = self.line else { return }
+            if line.transform != .identity {
+                line.transform = CGAffineTransform.init(translationX:
+                    (object.bounds.width / CGFloat(self.buttons.count == 0 ? 1 : self.buttons.count)) *
+                        CGFloat(self.selectedIndex), y: 0)
+            }
+        }
+
+        view.addConstraint(
             NSLayoutConstraint(item: view, attribute: .height, relatedBy: .equal, toItem: nil,
-                               attribute: .notAnAttribute, multiplier: 1, constant: 2), self.lineWidth!
-            ])
+                               attribute: .notAnAttribute, multiplier: 1, constant: 2)
+            )
 
         self.line = view
 
@@ -110,7 +128,7 @@ public class TITabBar: UIView {
         UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 1,
                        initialSpringVelocity: 0.6, options: [], animations: {
             self.line?.transform =
-                CGAffineTransform(translationX: (self.lineWidth?.constant ?? 0.0) * CGFloat(self.selectedIndex),
+                CGAffineTransform(translationX: (self.line?.frame.width ?? 0.0) * CGFloat(self.selectedIndex),
                                   y: 0.0)
             self.buttons.forEach {
                 $0.backgroundColor = self.backgroundTabColor
@@ -121,13 +139,33 @@ public class TITabBar: UIView {
         }, completion: nil)
     }
 
+    func createLineWidth(multiplier: Int) {
+        guard let line = line else {
+            return
+        }
+
+        if lineWidth != nil {
+            NSLayoutConstraint.deactivate([lineWidth!])
+            self.removeConstraint(lineWidth!)
+        }
+
+        self.lineWidth = NSLayoutConstraint(item: line, attribute: .width, relatedBy: .equal, toItem: self,
+                                            attribute: .width,
+                                            multiplier: (1.0 / (multiplier == 0 ? 1.0 : CGFloat(multiplier))),
+                                            constant: 0.0)
+
+        self.addConstraint(self.lineWidth!)
+
+        NSLayoutConstraint.activate([self.lineWidth!])
+    }
+
     @objc func selectOption(sender: UIControl) {
         self.selectedIndex = sender.tag
     }
 
     private func putButtons() {
+        createLineWidth(multiplier: buttons.count)
         if buttons.count == 0 {
-            lineWidth?.constant = 0
             while stackView?.arrangedSubviews.first != nil {
                 stackView?.removeArrangedSubview((stackView?.arrangedSubviews.first)!)
             }
@@ -138,7 +176,13 @@ public class TITabBar: UIView {
             buttons[index].backgroundColor = self.backgroundTabColor
             buttons[index].tintColor = self.tintColor
             stackView?.addArrangedSubview(buttons[index])
-            lineWidth?.constant = self.frame.width / CGFloat(buttons.count)
         }
     }
+
+    public func add(button: UIButton) {
+        buttons.append(button)
+        putButtons()
+        setNeedsLayout()
+    }
+
 }

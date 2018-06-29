@@ -25,6 +25,9 @@ public protocol Style {
     var defaultButtonColor: UIColor { get }
     var pressedButtonColor: UIColor { get }
 
+    var tabBarDefaultColor: UIColor { get }
+    var tabBarSelectedColor: UIColor { get }
+
 }
 
 public struct DefaultStyle: Style {
@@ -52,5 +55,9 @@ public struct DefaultStyle: Style {
     public var defaultButtonColor: UIColor = UIColor.lava
 
     public var pressedButtonColor: UIColor = UIColor.geraldine
+
+    public var tabBarDefaultColor: UIColor = UIColor.lava
+
+    public var tabBarSelectedColor: UIColor = UIColor.thunderBird
 
 }
