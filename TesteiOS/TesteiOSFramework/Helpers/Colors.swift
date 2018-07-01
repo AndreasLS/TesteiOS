@@ -18,8 +18,8 @@ extension UIColor {
     static var deepCarmim = UIColor(red: 1.00, green: 0.12, blue: 0.12, alpha: 1.0)
     static var apple = UIColor(red: 0.40, green: 0.75, blue: 0.19, alpha: 1.0)
     static var cloudy = UIColor(red: 0.69, green: 0.66, blue: 0.64, alpha: 1.0)
-    static var lava = UIColor(red: 0.85, green: 0.04, blue: 0.09, alpha: 1.0)
+    static var lava = UIColor(red:0.85, green:0.00, blue:0.00, alpha:1.0)
     static var geraldine = UIColor(red: 0.92, green: 0.46, blue: 0.46, alpha: 1.0)
     static var thunderBird = UIColor(red: 0.73, green: 0.15, blue: 0.11, alpha: 1.0)
-
+    static var aluminium = UIColor(red:0.59, green:0.59, blue:0.59, alpha:1.0)
 }

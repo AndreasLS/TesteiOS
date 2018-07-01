@@ -21,12 +21,16 @@ public protocol Style {
     var fieldInactiveColor: UIColor { get }
 
     var fieldFont: UIFont { get }
+    var checkBoxFont: UIFont { get }
 
     var defaultButtonColor: UIColor { get }
     var pressedButtonColor: UIColor { get }
 
     var tabBarDefaultColor: UIColor { get }
     var tabBarSelectedColor: UIColor { get }
+    
+    var checkBoxColor: UIColor { get }
+    var checkedCheckBoxColor: UIColor { get }
 
 }
 
@@ -59,5 +63,10 @@ public struct DefaultStyle: Style {
     public var tabBarDefaultColor: UIColor = UIColor.lava
 
     public var tabBarSelectedColor: UIColor = UIColor.thunderBird
+    
+    public var checkBoxColor: UIColor = UIColor.aluminium
+    
+    public var checkedCheckBoxColor: UIColor = UIColor.lava
 
+    public var checkBoxFont: UIFont = UIFont.systemFont(ofSize: 18, weight: .light)
 }

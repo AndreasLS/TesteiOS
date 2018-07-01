@@ -24,6 +24,7 @@
 		1241CFB320E2796F00A691B6 /* TIStateValidableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1241CFB220E2796F00A691B6 /* TIStateValidableTextField.swift */; };
 		1241CFB920E3CB2300A691B6 /* TITabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1241CFB820E3CB2300A691B6 /* TITabBarController.swift */; };
 		1241CFBB20E3CB6A00A691B6 /* TITabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1241CFBA20E3CB6A00A691B6 /* TITabBar.swift */; };
+		12F460E520E8B75600E2A6FD /* TICheckbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F460E420E8B75600E2A6FD /* TICheckbox.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		1241CFB220E2796F00A691B6 /* TIStateValidableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TIStateValidableTextField.swift; sourceTree = "<group>"; };
 		1241CFB820E3CB2300A691B6 /* TITabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TITabBarController.swift; sourceTree = "<group>"; };
 		1241CFBA20E3CB6A00A691B6 /* TITabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TITabBar.swift; sourceTree = "<group>"; };
+		12F460E420E8B75600E2A6FD /* TICheckbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TICheckbox.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +169,7 @@
 				1241CFA620E1849000A691B6 /* TIStateTextField.swift */,
 				1241CFB820E3CB2300A691B6 /* TITabBarController.swift */,
 				1241CFBA20E3CB6A00A691B6 /* TITabBar.swift */,
+				12F460E420E8B75600E2A6FD /* TICheckbox.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -376,6 +379,7 @@
 				1241CFB320E2796F00A691B6 /* TIStateValidableTextField.swift in Sources */,
 				1241CFB920E3CB2300A691B6 /* TITabBarController.swift in Sources */,
 				1241CFAC20E18C3500A691B6 /* Colors.swift in Sources */,
+				12F460E520E8B75600E2A6FD /* TICheckbox.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
